@@ -1,0 +1,22 @@
+api:
+  build: ./build/back
+  ports:
+   - "8000:8000"
+  hostname: "api"
+  volumes: 
+    - ./app/back:/etc/app
+  working_dir: /etc/app
+  links:
+    - dataBase
+dataBase:
+  image: mongo:3.2.1
+  volumes: 
+    - ./db:/data/db
+front:
+  build: ./build/front
+  volumes: 
+    - ./app/front:/etc/app
+  working_dir: /etc/app
+  ports:
+   - "8080:8080" 
+  hostname: "front"
